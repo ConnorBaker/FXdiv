@@ -1,5 +1,8 @@
 CMAKE_MINIMUM_REQUIRED(VERSION 3.5 FATAL_ERROR)
 
+# Allow specifying -D<PackageName>_ROOT
+CMAKE_POLICY(SET CMP0074 NEW)
+
 # ---[ Project
 PROJECT(FXdiv C CXX)
 
@@ -91,14 +94,14 @@ IF(FXDIV_BUILD_TESTS)
   SET_TARGET_PROPERTIES(multiply-high-test PROPERTIES
     CXX_STANDARD 11
     CXX_EXTENSIONS YES)
-  TARGET_LINK_LIBRARIES(multiply-high-test fxdiv gtest gtest_main)
+  TARGET_LINK_LIBRARIES(multiply-high-test fxdiv GTest::gtest GTest::gtest_main)
   ADD_TEST(multiply-high multiply-high-test)
 
   ADD_EXECUTABLE(quotient-test test/quotient.cc)
   SET_TARGET_PROPERTIES(quotient-test PROPERTIES
     CXX_STANDARD 11
     CXX_EXTENSIONS YES)
-  TARGET_LINK_LIBRARIES(quotient-test fxdiv gtest gtest_main)
+  TARGET_LINK_LIBRARIES(quotient-test fxdiv GTest::gtest GTest::gtest_main)
   ADD_TEST(quotient quotient-test)
 ENDIF()
 
@@ -115,29 +118,29 @@ IF(FXDIV_BUILD_BENCHMARKS)
   SET_TARGET_PROPERTIES(init-bench PROPERTIES
     CXX_STANDARD 11
     CXX_EXTENSIONS YES)
-  TARGET_LINK_LIBRARIES(init-bench fxdiv benchmark)
+  TARGET_LINK_LIBRARIES(init-bench fxdiv benchmark::benchmark)
 
   ADD_EXECUTABLE(multiply-bench bench/multiply.cc)
   SET_TARGET_PROPERTIES(multiply-bench PROPERTIES
     CXX_STANDARD 11
     CXX_EXTENSIONS YES)
-  TARGET_LINK_LIBRARIES(multiply-bench fxdiv benchmark)
+  TARGET_LINK_LIBRARIES(multiply-bench fxdiv benchmark::benchmark)
 
   ADD_EXECUTABLE(divide-bench bench/divide.cc)
   SET_TARGET_PROPERTIES(divide-bench PROPERTIES
     CXX_STANDARD 11
     CXX_EXTENSIONS YES)
-  TARGET_LINK_LIBRARIES(divide-bench fxdiv benchmark)
+  TARGET_LINK_LIBRARIES(divide-bench fxdiv benchmark::benchmark)
 
   ADD_EXECUTABLE(quotient-bench bench/quotient.cc)
   SET_TARGET_PROPERTIES(quotient-bench PROPERTIES
     CXX_STANDARD 11
     CXX_EXTENSIONS YES)
-  TARGET_LINK_LIBRARIES(quotient-bench fxdiv benchmark)
+  TARGET_LINK_LIBRARIES(quotient-bench fxdiv benchmark::benchmark)
 
   ADD_EXECUTABLE(round-down-bench bench/round-down.cc)
   SET_TARGET_PROPERTIES(round-down-bench PROPERTIES
     CXX_STANDARD 11
     CXX_EXTENSIONS YES)
-  TARGET_LINK_LIBRARIES(round-down-bench fxdiv benchmark)
+  TARGET_LINK_LIBRARIES(round-down-bench fxdiv benchmark::benchmark)
 ENDIF()
